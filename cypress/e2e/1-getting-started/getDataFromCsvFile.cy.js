@@ -8,11 +8,11 @@ it('Get data from a .csv file and convert it to json file', () => {
       console.log("--- Full data: ", fullData);
       const obtainedCity = data[0].city;
 
-      if(obtainedCity === "Bogotá") {
+      if (obtainedCity === "Bogotá") {
         console.log("✅", obtainedCity);
       } else {
         console.error("🔥");
       }
     });
   });
-})
+});
