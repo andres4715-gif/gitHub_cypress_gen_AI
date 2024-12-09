@@ -85,6 +85,16 @@ context('Actions', () => {
     });
   });
 
+  it('invoke_2', () => {
+    cy.visit('https://example.cypress.io/commands/connectors');
+    cy.get('.connectors-div').should('be.hidden')
+      .invoke('show')
+      .should('be.visible');
+    cy.get('.col-xs-5 .well .connectors-div').invoke('text').then(item => {
+      cy.log('--- Obtained text', item);
+    });
+  });
+
   it('Connectors', () => {
     cy.visit('https://example.cypress.io/commands/connectors');
     let myData = [];
@@ -109,5 +119,26 @@ context('Actions', () => {
       myArray.push(newData);
       console.log("Array of names:", myArray);
     });
+  });
+
+  it('its()', () => {
+    let myArray = [];
+    cy.visit('https://example.cypress.io/commands/connectors');
+    cy.get('.connectors-its-ul > li').its('length').should('be.gt', 2);
+  });
+
+  it('get cookie', () => {
+    cy.visit('https://example.cypress.io/commands/cookies');
+    cy.get('#getCookie .set-a-cookie').click();
+    cy.getCookie('token').then((cookie) => {
+      const cookie2 = cookie.value;
+      cy.log(cookie2)
+    });
+  });
+
+  it('get cookies', () => {
+    cy.visit('https://example.cypress.io/commands/cookies');
+    cy.get('#getCookie .set-a-cookie').click();
+    cy.getCookies().should('have.length', 1)
   });
 });
