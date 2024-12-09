@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-context('Actions', () => {
+describe.skip('Actions', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/actions');
   });
@@ -95,6 +95,17 @@ context('Actions', () => {
     });
   });
 
+  it('invoke_3', () => {
+    cy.origin('https://opensource-demo.orangehrmlive.com', () => {
+      cy.visit('/web/index.php/auth/login'); // La ruta después del dominio
+      cy.get('#app > div.orangehrm-login-layout > div > div.orangehrm-login-container > div > div.orangehrm-login-slot > h5')
+        .invoke('text')
+        .then((data) => {
+          cy.log(data);
+        });
+    });
+  });
+
   it('Connectors', () => {
     cy.visit('https://example.cypress.io/commands/connectors');
     let myData = [];
@@ -161,4 +172,23 @@ context('Actions', () => {
     cy.visit('https://example.cypress.io');
     cy.reload();
   });
+});
+
+describe('Traversal', () => {
+  it('Traversal element in the DOM - .children()', () => {
+    cy.visit('https://example.cypress.io/commands/traversal#');
+    cy.get('.traversal-breadcrumb').children('.active').should('contain', 'Data').click();
+  });
+
+  it('Traversal element in the DOM - .closest()', () => {
+    cy.visit('https://example.cypress.io/commands/traversal#');
+    cy.get('.traversal-badge')
+      .closest('ul')
+      .should('have.class', 'list-group');
+  });
+
+  it('Traversal element in the DOM - eq()', () => {
+    cy.visit('https://example.cypress.io/commands/traversal#');
+    cy.get('.traversal-list>li').eq(3).should('have.text', 'sphynx');
+    });
 });
