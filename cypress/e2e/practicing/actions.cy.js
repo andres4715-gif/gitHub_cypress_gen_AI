@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe.skip('Actions', () => {
+describe('Actions', () => {
   beforeEach(() => {
     cy.visit('https://example.cypress.io/commands/actions');
   });
