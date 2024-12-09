@@ -132,13 +132,33 @@ context('Actions', () => {
     cy.get('#getCookie .set-a-cookie').click();
     cy.getCookie('token').then((cookie) => {
       const cookie2 = cookie.value;
-      cy.log(cookie2)
+      cy.log(cookie2);
     });
   });
 
   it('get cookies', () => {
     cy.visit('https://example.cypress.io/commands/cookies');
     cy.get('#getCookie .set-a-cookie').click();
-    cy.getCookies().should('have.length', 1)
+    cy.getCookies().should('have.length', 1);
+  });
+
+  it('Get url', () => {
+    cy.url().then((url) => {
+      cy.log('--- 😎 The current URL is: ', `${url}`);
+    });
+  });
+
+  it('back', () => {
+    cy.visit('https://example.cypress.io');
+    cy.get('.navbar-nav').contains('Commands').click();
+    cy.get('.dropdown-menu').contains('Navigation').click();
+    cy.go('back');
+    cy.go('forward').contains('Navigation');
+    cy.go(-1).contains('Assertions');
+  });
+
+  it('reload', () => {
+    cy.visit('https://example.cypress.io');
+    cy.reload();
   });
 });
