@@ -36,10 +36,42 @@ context('Actions', () => {
     // .submit()
     cy.get('.action-form').as('submit');
     cy.get('@submit').find('[type="text"]').as('finalSubmit');
-    cy.get('@finalSubmit').type('Rios ✅')
+    cy.get('@finalSubmit').type('Rios ✅');
     cy.get('@finalSubmit').should('have.value', 'Rios ✅');
     cy.get('.action-form').as('submitAction');
     cy.get('@submitAction').submit();
-    cy.get('.well > p').should('have.text', 'Your form has been submitted!')
+    cy.get('.well > p').should('have.text', 'Your form has been submitted!');
+
+    // .click() using canvas:
+    cy.get('#action-canvas').as('canvas').click();
+    cy.get('@canvas').click('topLeft');
+    cy.get('@canvas').click('top');
+
+    // dblclick()
+    const addingData = 'checking double click';
+    cy.get('.action-div').dblclick();
+    cy.get('.action-input-hidden').clear().type(addingData);
+    cy.wait(1000);
+    cy.get('.action-input-hidden').should('have.value', addingData);
+
+    // check()
+    cy.get('.action-checkboxes [type="checkbox"]').first().check({ force: true });
+    cy.get('.action-checkboxes [type="checkbox"]').should('be.checked');
+    cy.get('.action-checkboxes [type="checkbox"]').first().uncheck({ force: true });
+    cy.get('.action-checkboxes [type="checkbox"]').first().should('not.be.checked');
+    cy.get('#optionsRadios1').check({ force: true });
+
+    // select()
+    cy.get('.action-select').select('bananas');
+
+    // scrollIntoView()
+    cy.get('#scroll-horizontal button').as('scrollIntoViewButton').scrollIntoView();
+    cy.get('@scrollIntoViewButton').click();
+
+    // invoke()
+    cy.visit('https://on.cypress.io/and');
+    cy.get('.headerWrapper_tu51').first().invoke('text').then(data => {
+      cy.log('🚀🚀🚀🚀🚀', data);
+    });
   });
 });
