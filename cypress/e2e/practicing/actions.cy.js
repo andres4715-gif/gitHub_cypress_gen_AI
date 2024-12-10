@@ -2,7 +2,7 @@
 
 describe('Actions', () => {
   beforeEach(() => {
-    cy.visit('https://example.cypress.io/commands/actions');
+    cy.log('Practicing cypress features');
   });
 
   it('typing', () => {
@@ -18,12 +18,14 @@ describe('Actions', () => {
   });
 
   it('.as', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('#email1').as('email');
     cy.get('@email').type('✅✅✅✅✅');
     cy.get('@email').should('have.value', '✅✅✅✅✅');
   });
 
   it('getting text() using a promise', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('[for="couponCode1"]').then(data => {
       const finalData = data.text();
       expect(finalData).to.equal('Coupon Code');
@@ -31,6 +33,7 @@ describe('Actions', () => {
   });
 
   it('getting text() using invoke()', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('.banner').invoke('text').then(data2 => {
       cy.log(data2);
       expect(data2).to.include('Examples of actions being performed on DOM');
@@ -38,6 +41,7 @@ describe('Actions', () => {
   });
 
   it('.submit', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('.action-form').as('submit');
     cy.get('@submit').find('[type="text"]').as('finalSubmit');
     cy.get('@finalSubmit').type('Rios ✅');
@@ -48,12 +52,14 @@ describe('Actions', () => {
   });
 
   it('.click() using canvas:', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('#action-canvas').as('canvas').click();
     cy.get('@canvas').click('topLeft');
     cy.get('@canvas').click('top');
   });
 
   it(' dblclick()', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     const addingData = 'checking double click';
     cy.get('.action-div').dblclick();
     cy.get('.action-input-hidden').clear().type(addingData);
@@ -62,6 +68,7 @@ describe('Actions', () => {
   });
 
   it('check()', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('.action-checkboxes [type="checkbox"]').first().check({ force: true });
     cy.get('.action-checkboxes [type="checkbox"]').should('be.checked');
     cy.get('.action-checkboxes [type="checkbox"]').first().uncheck({ force: true });
@@ -70,10 +77,12 @@ describe('Actions', () => {
   });
 
   it('select', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('.action-select').select('bananas');
   });
 
   it('scrollIntoView()', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
     cy.get('#scroll-horizontal button').as('scrollIntoViewButton').scrollIntoView();
     cy.get('@scrollIntoViewButton').click();
   });
@@ -159,6 +168,19 @@ describe('Actions', () => {
     });
   });
 
+  it('get label', () => {
+    cy.visit('https://demo.nopcommerce.com/');
+    cy.get('[class="topic-block-title"] > h2').then((label) => {
+      const finalData = label.text();
+      cy.wrap(finalData).as('finalLabel');
+      cy.log("🚀🚀🚀", finalData);
+      cy.get('.ico-register').click();
+      cy.get('@finalLabel').then(label => {
+        cy.log("😻😻😻", label);
+      });
+    });
+  });
+
   it('back', () => {
     cy.visit('https://example.cypress.io');
     cy.get('.navbar-nav').contains('Commands').click();
@@ -171,6 +193,26 @@ describe('Actions', () => {
   it('reload', () => {
     cy.visit('https://example.cypress.io');
     cy.reload();
+  });
+
+  it('press any key', () => {
+    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+    cy.get('[name="username"]').as('login').type('Admin');
+    cy.get('@login').type('{enter}');
+    cy.get('.oxd-input-field-error-message').should('have.text', 'Required');
+  });
+
+  it('list', () => {
+    let myArray = [];
+    let filtering = [];
+    cy.visit('https://www.roboform.com/filling-test-all-fields');
+    cy.get('#newfootinner > div:nth-child(2) > ul > li').as('elementList').each(element => {
+      myArray.push(element.text());
+      filtering = myArray.filter(x => x.startsWith('B'));
+      console.log(filtering);
+    });
+    cy.get('@elementList').should('contain.text', 'Pricing');
+    cy.get('@elementList').its('length').should('be.gt', 2);
   });
 });
 
