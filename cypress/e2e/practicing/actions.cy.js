@@ -190,5 +190,23 @@ describe('Traversal', () => {
   it('Traversal element in the DOM - eq()', () => {
     cy.visit('https://example.cypress.io/commands/traversal#');
     cy.get('.traversal-list>li').eq(3).should('have.text', 'sphynx');
+  });
+});
+
+describe('session', () => {
+  beforeEach(() => {
+    cy.session('orangehrm-session', () => {
+      cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+      cy.get('[name="username"]').type('Admin');
+      cy.get('[name="password"]').type('admin123');
+      cy.get('[type="submit"]').click();
+      cy.url().should('include', '/dashboard');
     });
+  });
+
+  it('Commands', () => {
+    cy.login('Andres', 43, 'Medellin').then(x => {
+      cy.log(x);
+    });
+  });
 });
