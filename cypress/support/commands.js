@@ -4,5 +4,5 @@ Cypress.Commands.add('login', (name, age, city) => {
     age: age,
     city: city
   };
-  return `El nombre es: ${data.name} y tiene ${data.age} vive en ${data.city}`;
+  return `The name is: ${data.name} with ${data.age} and ${data.city}`;
 });
