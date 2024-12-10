@@ -20,7 +20,7 @@ describe('Actions', () => {
   it('.as', () => {
     cy.visit('https://example.cypress.io/commands/actions');
     cy.get('#email1').as('email');
-    cy.get('@email').type('✅✅✅✅✅');
+    cy.get('@email').type('✅✅✅✅✅', { delay: 700 });
     cy.get('@email').should('have.value', '✅✅✅✅✅');
   });
 
@@ -74,6 +74,15 @@ describe('Actions', () => {
     cy.get('.action-checkboxes [type="checkbox"]').first().uncheck({ force: true });
     cy.get('.action-checkboxes [type="checkbox"]').first().should('not.be.checked');
     cy.get('#optionsRadios1').check({ force: true });
+  });
+
+  it('scroll bottom and top', () => {
+    cy.visit('https://example.cypress.io/commands/actions');
+    cy.scrollTo('bottom');
+    cy.wait(1000);
+    cy.scrollTo('top');
+    cy.wait(1000);
+    cy.get('#clear > a').scrollIntoView();
   });
 
   it('select', () => {
