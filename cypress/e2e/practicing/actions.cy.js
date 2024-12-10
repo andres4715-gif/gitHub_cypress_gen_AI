@@ -168,7 +168,7 @@ describe('Actions', () => {
     });
   });
 
-  it('get label', () => {
+  it('get label with wrap();', () => {
     cy.visit('https://demo.nopcommerce.com/');
     cy.get('[class="topic-block-title"] > h2').then((label) => {
       const finalData = label.text();
@@ -181,6 +181,24 @@ describe('Actions', () => {
     });
   });
 
+  it('Get label from any attribute', () => {
+    cy.visit('https://demo.nopcommerce.com/');
+    cy.get('#small-search-box-form ')
+      .find('#small-searchterms')
+      .invoke('attr', 'placeholder')
+      .then((value) => {
+        cy.log(value);
+      });
+  });
+
+  it('click()', () => {
+    cy.visit('https://demo.nopcommerce.com/');
+    cy.get('.ico-login').should('be.visible').click();
+    cy.get('.email').type('andres8989@gmail.com');
+    cy.get('#Password').type('123ABCD');
+    cy.get('form > .buttons > .button-1').should('be.visible').click();
+  });
+
   it('back', () => {
     cy.visit('https://example.cypress.io');
     cy.get('.navbar-nav').contains('Commands').click();
@@ -188,6 +206,18 @@ describe('Actions', () => {
     cy.go('back');
     cy.go('forward').contains('Navigation');
     cy.go(-1).contains('Assertions');
+  });
+
+  it('Checkbox', () => {
+    cy.visit('https://demo.nopcommerce.com/');
+    cy.get('.ico-login').should('be.visible').click();
+    cy.get('#RememberMe').should('be.visible').check({ force: true });
+  });
+
+  it('Radio button', () => {
+    cy.visit('https://demo.nopcommerce.com/');
+    cy.get('.ico-register').should('be.visible').click();
+    cy.get('#gender-female').should('be.visible').check({ force: true });
   });
 
   it('reload', () => {
