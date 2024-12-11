@@ -1,5 +1,21 @@
 {
-  "name": "Using fixtures to represent data",
+  "title": "Sr",
+  "firstName": "Juanita",
+  "lastName": "Retrechera",
+  "activities": {
+    "playSoccer": true,
+    "playPiano": false
+  },
+  "pets": [
+    {
+      "name": "0rion",
+      "age": 5
+    },
+    {
+      "name": "Teo",
+      "age": 4
+    }
+  ],
   "email": "hello@cypress.io",
   "body": "Fixtures are a great way to mock data for responses to routes"
 }

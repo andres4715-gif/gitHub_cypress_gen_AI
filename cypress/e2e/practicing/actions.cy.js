@@ -5,6 +5,27 @@ describe('Actions', () => {
     cy.log('Practicing cypress features');
   });
 
+  it('Fixture', () => {
+    cy.visit('https://www.roboform.com/filling-test-all-fields');
+    cy.fixture('example').then(({ title, firstName, lastName, activities, pets, email, body }) => {
+      cy.log(title);
+      cy.log(firstName);
+      cy.log(lastName);
+      cy.log(activities);
+      cy.log(pets[0].name);
+      cy.log(pets[0].age);
+      cy.log(email);
+      cy.log(body);
+
+      cy.get('[name="01___title"]').type(title);
+      cy.get('[name="02frstname"]').type(firstName);
+      cy.get('[name="04lastname"]').type(lastName);
+
+      const data = pets.map(x => x.name);
+      cy.log('😎😎😎 The pets names are:', data.join(', '));
+    });
+  });
+
   it('typing', () => {
     const email = 'andres798@gmail.com';
     const validEmail = 'andres4715@gmail.com';
