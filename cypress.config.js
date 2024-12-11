@@ -3,11 +3,9 @@ require('dotenv').config();
 
 module.exports = defineConfig({
   e2e: {
+    baseUrl: 'https://example.cypress.io',
     setupNodeEvents(on, config) {
       return config;
     },
-  },
-  env: {
-    GEN_AI_API_KEY: process.env.GEN_AI_API_KEY,
   },
 });
