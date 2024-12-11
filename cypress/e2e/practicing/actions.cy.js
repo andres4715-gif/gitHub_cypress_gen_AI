@@ -67,6 +67,11 @@ describe('Actions', () => {
     cy.get('@email').should('have.value', '✅✅✅✅✅');
   });
 
+  it.only('DropDown', () => {
+    cy.visit('https://demo.nopcommerce.com/gift-cards');
+    cy.get('[name="products-orderby"]').select('Created on');
+  });
+
   it('getting text() using a promise', () => {
     cy.visit('https://example.cypress.io/commands/actions');
     cy.get('[for="couponCode1"]').then(data => {

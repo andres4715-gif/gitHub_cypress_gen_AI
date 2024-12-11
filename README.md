@@ -24,5 +24,5 @@ GEN_AI_API_KEY= "[OBTAINED USER KEY FORM THE OPEN AI PLATFORM]"
 - intercept ✅
 - fixture ✅
 - commands ✅
-- create POM 
-- dropdown
+- create POM ✅
+- dropdown 
