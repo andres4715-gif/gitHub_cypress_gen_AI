@@ -25,4 +25,4 @@ GEN_AI_API_KEY= "[OBTAINED USER KEY FORM THE OPEN AI PLATFORM]"
 - fixture ✅
 - commands ✅
 - create POM ✅
-- dropdown 
+- dropdown ✅
