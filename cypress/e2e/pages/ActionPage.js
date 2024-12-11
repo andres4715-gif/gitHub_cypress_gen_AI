@@ -1,7 +1,7 @@
-import { HomePageLocators } from './locators/homePageLocators';
+import { ActionsLocators } from './locators/actionsLocator';
 
 export class ActionPage {
   addEmail(text) {
-    cy.get(HomePageLocators.email).type(`${text}`);
+    cy.get(ActionsLocators.email).type(`${text}`);
   }
 }
