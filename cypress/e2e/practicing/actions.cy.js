@@ -67,7 +67,7 @@ describe('Actions', () => {
     cy.get('@email').should('have.value', '✅✅✅✅✅');
   });
 
-  it.only('DropDown', () => {
+  it('DropDown', () => {
     cy.visit('https://demo.nopcommerce.com/gift-cards');
     cy.get('[name="products-orderby"]').select('Created on');
   });
