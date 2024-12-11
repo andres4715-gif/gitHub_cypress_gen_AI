@@ -22,7 +22,7 @@ GEN_AI_API_KEY= "[OBTAINED USER KEY FORM THE OPEN AI PLATFORM]"
 # Pending to practice:
 
 - intercept
-- fixture
+- fixture ✅
 - commands
 - create POM
 - dropdown

@@ -26,6 +26,28 @@ describe('Actions', () => {
     });
   });
 
+  it('API request', () => {
+    cy.request('GET', 'https://reqres.in/api/users?page=1').then((response) => {
+      expect(response.status).to.equal(200);
+      const data = response.body;
+      cy.log(data.data[0].email);
+    });
+  });
+
+  it('Intercept', () => {
+    cy.intercept('GET', 'https://jsonplaceholder.typicode.com/posts').as('getPosts');
+    cy.window().then((win) => {
+      fetch('https://jsonplaceholder.typicode.com/posts');
+    });
+
+    cy.wait('@getPosts').then((interception) => {
+      expect(interception.response.statusCode).to.equal(200);
+      expect(interception.response.body).to.have.length(100);
+      const firstPost = interception.response.body;
+      cy.log(`First post title: ${firstPost.title}`);
+    });
+  });
+
   it('typing', () => {
     const email = 'andres798@gmail.com';
     const validEmail = 'andres4715@gmail.com';
@@ -274,7 +296,8 @@ describe('Actions', () => {
     cy.get('@elementList').should('contain.text', 'Pricing');
     cy.get('@elementList').its('length').should('be.gt', 2);
   });
-});
+})
+;
 
 describe('Traversal', () => {
   it('Traversal element in the DOM - .children()', () => {
