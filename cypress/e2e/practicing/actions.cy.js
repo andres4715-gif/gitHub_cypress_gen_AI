@@ -44,13 +44,14 @@ describe('Actions', () => {
       expect(interception.response.statusCode).to.equal(200);
       expect(interception.response.body).to.have.length(100);
       const firstPost = interception.response.body;
-      cy.log(`First post title: ${firstPost.title}`);
+      console.log(`First post title: ${firstPost[0].title}`);
     });
   });
 
   it('typing', () => {
     const email = 'andres798@gmail.com';
     const validEmail = 'andres4715@gmail.com';
+
     cy.visit('https://example.cypress.io/commands/actions');
     cy.get('#email1').type(email);
     cy.get('#email1').should('have.value', email);
@@ -82,7 +83,8 @@ describe('Actions', () => {
 
   it('getting text() using invoke()', () => {
     cy.visit('https://example.cypress.io/commands/actions');
-    cy.get('.banner').invoke('text').then(data2 => {
+    cy.get('.banner')
+      .invoke('text').then(data2 => {
       cy.log(data2);
       expect(data2).to.include('Examples of actions being performed on DOM');
     });
@@ -104,6 +106,12 @@ describe('Actions', () => {
     cy.get('#action-canvas').as('canvas').click();
     cy.get('@canvas').click('topLeft');
     cy.get('@canvas').click('top');
+    cy.get('@canvas').click('topRight');
+    cy.get('@canvas').click('left');
+    cy.get('@canvas').click('right');
+    cy.get('@canvas').click('bottomRight');
+    cy.get('@canvas').click('bottomLeft');
+    cy.get('@canvas').click('bottom');
   });
 
   it(' dblclick()', () => {
@@ -146,7 +154,8 @@ describe('Actions', () => {
 
   it('invoke()', () => {
     cy.visit('https://on.cypress.io/and');
-    cy.get('.headerWrapper_tu51').first().invoke('text').then(data => {
+    cy.get('.productHeadingText_hnni').as('invoke')
+      cy.get('@invoke').first().invoke('text').then(data => {
       cy.log('🚀🚀🚀🚀🚀', data);
     });
   });
