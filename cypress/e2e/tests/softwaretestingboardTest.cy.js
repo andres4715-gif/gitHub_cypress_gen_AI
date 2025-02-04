@@ -4,7 +4,7 @@ const homeMagentoPage = new HomeMagentoPage();
 describe('Should be able to search a remera', () => {
   beforeEach(() => {
     cy.log("🚀🚀🚀🚀 Starting tests");
-    cy.openUrl('/');
+    cy.openUrl('https://magento.softwaretestingboard.com');
   });
 
   it('Find remera in the official page', () => {

@@ -3,7 +3,7 @@ require('dotenv').config();
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://magento.softwaretestingboard.com',
+    baseUrl: 'https://example.cypress.io',
     setupNodeEvents(on, config) {
       return config;
     },
